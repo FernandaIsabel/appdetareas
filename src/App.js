@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import TaskList from './components/TaskList';
+import AddTaskForm from './components/AddTaskForm';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [tasks, setTasks] = useState([
+    { id: 1, title: 'Tarea 1'},
+    { id: 2, title: 'Tarea 2'},
+  ]);
+
+  const addTask = newTask => {
+    setTasks([...tasks, {id: tasks.length + 1, title: newTask }]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Lista de tareas</h1>
+      <TaskList tasks={tasks} />
+      <AddTaskForm addTask={addTask} />
     </div>
   );
-}
+};
+
+
 
 export default App;
